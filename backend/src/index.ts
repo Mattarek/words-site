@@ -7,9 +7,12 @@ import dotenv from 'dotenv';
 import { createWriteStream } from 'fs';
 import { join } from 'path';
 
+import poolDB from './db';
+
 const app: Application = express();
+const port = process.env.PORT || 3001;
 const accessLogStream = createWriteStream(
-    join(__dirname, '../logs/access.log'),
+    join(__dirname, './logs/access.log'),
     { flags: 'a' },
 );
 
@@ -32,3 +35,17 @@ app.use(
         },
     ),
 );
+
+const run = async () => {
+    try {
+        const connection = await poolDB.getConnection();
+        if (connection) {
+            app.listen(port, () => {
+                console.log(`Server is running on port ${process.env.PORT}`);
+            });
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+run();
