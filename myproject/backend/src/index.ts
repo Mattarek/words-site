@@ -23,11 +23,10 @@ app.use(helmet());
 
 app.use(
     cors({
-        origin: process.env.FRONTEND_URL,    
-        methods: "GET, POST, PUT, DELETE",
-        allowedHeaders: "Content-Type, Authorization",
+        origin: process.env.FRONTEND_URL,
+        methods: 'GET, POST, PUT, DELETE',
+        allowedHeaders: 'Content-Type, Authorization',
         credentials: true,
-      })
     }),
 );
 
@@ -40,7 +39,7 @@ app.use(
     ),
 );
 
-app.use("/api/users", userRouter)
+app.use('/api/users', userRouter);
 
 const run = async () => {
     try {
