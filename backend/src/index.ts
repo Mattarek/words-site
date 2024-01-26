@@ -13,7 +13,7 @@ const app: Application = express();
 const port = process.env.PORT || 3001;
 const accessLogStream = createWriteStream(
     join(__dirname, './logs/access.log'),
-    { flags: 'a' },
+    { flags: 'w' },
 );
 
 // Middleware
